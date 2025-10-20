@@ -42,7 +42,7 @@ function attachConfirmDialog(retries = 10, delay = 1000) {
       }
 
       const baseBranchElement = document.querySelector(
-        '#base-ref-selector > summary > span > span > span'
+        '#base-ref-selector > summary > span > span > span:nth-child(2)'
       );
       const baseBranch = baseBranchElement
         ? baseBranchElement.textContent.trim()
