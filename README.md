@@ -16,6 +16,6 @@ GitHub で Pull Request を作成した際に base branch が正しいか確認�
 
 ## 確認方法
 
-"Create pull request" ボタンが青色になっていれば有効化されています。
+"Create pull request" や "Merge pull request" ボタンが青色になっていれば有効化されています。
 
 ![Applied Button](./images/applied-button.png)
