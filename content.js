@@ -13,7 +13,7 @@ function createConfirmDialog(
                 z-index: 1000; border-radius: 8px; text-align: center;">
       <p style="color: black;">${message}</p>
       <button id="${cancelButtonId}" style="margin: 5px; padding: 8px 12px;">キャンセル</button>
-      <button id="${confirmButtonId}" style="margin: 5px; padding: 8px 12px;">確認</button>
+      <button id="${confirmButtonId}" style="margin: 5px; padding: 8px 12px;">OK</button>
     </div>
   `;
   document.body.appendChild(confirmDialog);
@@ -59,7 +59,15 @@ function attachConfirmDialogToButtons(config) {
     // ボタンの色を青くする
     button.style.backgroundColor = '#3191d8';
 
+    let isConfirmed = false;
+
     const handler = function (event) {
+      // 確認済みの場合は元の挙動を実行
+      if (isConfirmed) {
+        isConfirmed = false;
+        return;
+      }
+
       event.preventDefault();
       if (useCapture) {
         event.stopPropagation();
@@ -89,10 +97,9 @@ function attachConfirmDialogToButtons(config) {
         .addEventListener('click', function () {
           confirmDialog.remove();
 
-          // このリスナーを外してから click() する
-          button.removeEventListener('click', handler, useCapture);
-          button.click(); // 元々のボタンの動作を実行
-          button.addEventListener('click', handler, useCapture);
+          // フラグを立ててから元の挙動を実行
+          isConfirmed = true;
+          button.click();
         });
     };
 
